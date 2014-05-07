@@ -1,8 +1,8 @@
 <!-- 
-	INTERROGAZIONE NOTE RELATIVE AL SOGGETTO
-	Questa API interroga Diapason e restituisce tutte le note associate al soggetto
-	Questa è utile nel caso di soggetti (es dealer che hanno esigenze particolari)
-	In fase di rilascio dell'ordine aggiungo la nota alla comunicazione che invio all'operatore
+	INTERROGAZIONE TABELLA SCONTI LEGATA AL SOGGETTO
+	Questa API interroga Diapason e restituisce gli sconti caricati in quella tabella
+	
+	Riesco a risalire a quale tabella sconti è associato ad un soggetto interrigando l'API "GFDOrdCliDatComGet"
 	
 @param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
 @param $tabella_sconti {stringa} sconti per famiglie commerciali associate al soggetto
