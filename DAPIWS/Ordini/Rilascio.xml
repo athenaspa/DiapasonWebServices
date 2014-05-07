@@ -1,11 +1,13 @@
-## Resource properties
+<!--
+	RILASCIO ORDINE
+	Dopo l'inserimento dell'ordine se lo si vuole rendere "operativo" bisogna rilasciarlo
+
 @param $cliente_intestatario {string} codice identificativo a Diapason del cliente 
 @param $numero_ordine {string} codice che identifica univocamente l'ordine dentro a Diapason
 
-Dopo l'inserimento dell'ordine se lo si vuole rendere "operativo" bisogna rilasciarlo
 
-~~~~
-XML
+
+	-->
 <GFDOrdCliRels2>
 					<GFITEMS>
 									<RILASCIO-E-STAMPA-ORDINI-OFFERTE>
@@ -21,7 +23,6 @@ XML
 									</RILASCIO-E-STAMPA-ORDINI-OFFERTE>
 							</GFITEMS>
 					</GFDOrdCliRels2>
-~~~~
 
 
 

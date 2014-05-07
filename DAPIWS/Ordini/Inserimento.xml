@@ -1,5 +1,7 @@
-## Resource properties
-
+<!--
+INSERIMENTO ORDINI
+Interfacciandosi a Diapason tramite queste due api si inserisce un'ordine.	
+	
 @param $causale {string} causale dell'ordine: "V" = Vendita, "K" = omaggio rivalsa IVA
 @param $giro {string}  identificativo della tipologia dell'ordine: "MMD" ordini clienti assodati Aftermarket, "AFP" = ordini clienti guest Aftermarket, "DIS" = ordini clienti assodati Distribuzione, "DSP" = ordini clienti guest Distribuzione.
 @param $intestario {string} codice del soggetto che lo identifica dentro a diapason
@@ -15,10 +17,7 @@
 @param GFDOrdCliTesAdd API che aggiunge una testata d'ordine 
 @param GFDOrdCliRigAdd API che inserisce le righe dell'ordine. Non ci sono limiti <RIGHE-DORDINE-E-OFFERTA></RIGHE-DORDINE-E-OFFERTA> inseribili
 
-Interfacciandosi a Diapason tramite queste due api si inserisce un'ordine.
-
-~~~~
-XML
+-->
     <Inputs>
       <API>
       <Input>
@@ -94,10 +93,8 @@ XML
       <PutValue trx="RIGHE-DORDINE-E-OFFERTA" field="NUMERO-ORDINE" value="N-ORDINE" />
       </API>
       </Inputs>
-~~~~
 
-@note Il webservice risponde con lo stesso XML processato, con l'aggiunta in testata di
-~~~~
-XML
+<!--
+ Il webservice risponde con lo stesso XML processato, con l'aggiunta in testata di
       <NUMERO-ORDINE>13OC025518</NUMERO-ORDINE>
-~~~~
+-->

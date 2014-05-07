@@ -1,10 +1,9 @@
-##Resource properties
+<!-- 
+	INTERROGAZIONE VALORE ORDINE
+	Questa API interroga Diapason e restituisce il valore commerciale dell'ordine
+	
 @param $numero_ordine {stringa} codice che identifica univocamente l'ordine dentro a Diapason
-
-Questa API interroga Diapason e restituisce il valore commerciale dell'ordine
-
-~~~~
-XML
+-->
 <GFDOrdCliValGet>
 					  <GFITEMS>
 						<VALORE-ORDINI-FIDI-ANTICIPI>
@@ -12,4 +11,3 @@ XML
 						</VALORE-ORDINI-FIDI-ANTICIPI>
 					  </GFITEMS>
 					</GFDOrdCliValGet>
-~~~~
