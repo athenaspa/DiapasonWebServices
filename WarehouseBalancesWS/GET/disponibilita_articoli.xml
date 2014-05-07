@@ -1,0 +1,21 @@
+<!-- 
+	INTERROGAZIONE DATI RELATIVI ALLA DISPONIBILITA' DEGLI ARTICOLI
+	
+	
+@param $business_division {stringa} codice che identifica univocamente il flusso degli articoli
+
+$business_division = G => Distribuzione
+$business_division = M => Aftermarket moto
+$business_division = A => Automotive
+-->
+<Query name="WBalancesGrouped" orderBy="1" pagesize="0" service="WarehouseBalances" count="yes">
+	<Conditions>
+		<Condition name="addAttrValue" operator="=">
+			<Value>$business_division</Value>
+		</Condition>
+	</Conditions>
+	<Fields>
+		<Field name="itemCode"/>
+		<Field name="totalQty"/>
+	</Fields>
+</Query>

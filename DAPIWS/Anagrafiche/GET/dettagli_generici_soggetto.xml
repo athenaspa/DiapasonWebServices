@@ -1,0 +1,13 @@
+<!-- 
+	INTERROGAZIONE DATI GENERALI SOGGETTO
+	Questa API interroga Diapason e restituisce i dati generali del soggetto
+	
+@param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
+-->
+<GFDSogGet>
+	<GFITEMS>
+		<DATI-GENERALI-SOGGETTI>
+			<CODICE-SOGGETTO>$codice_soggetto</CODICE-SOGGETTO>
+		</DATI-GENERALI-SOGGETTI>
+	</GFITEMS>
+</GFDSogGet>

@@ -1,0 +1,14 @@
+<!-- 
+	INTERROGAZIONE DATI AMMINISTRATIVI SOGGETTO
+	Questa API interroga Diapason e restituisce i dati generali del soggetto
+	
+@param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
+-->
+<GFDOrdCliDatComGet>
+	<GFITEMS>
+		<DATI-GESTIONALI-CLIENTE>
+			<CLIENTE>$codice_soggetto</CLIENTE>
+			<DIVISIONE-COMMERCIALE>02</DIVISIONE-COMMERCIALE>
+		</DATI-GESTIONALI-CLIENTE>
+	</GFITEMS>
+</GFDOrdCliDatComGet>

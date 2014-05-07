@@ -1,0 +1,45 @@
+<Query name="AthSubject-Search" orderBy="1" pagesize="0" service="Subject" count="yes">
+	<Conditions>
+		<Condition name="email" operator="=" negative="sqlFilter">
+			<Value></Value>
+		</Condition>
+		<Condition name="email" operator="=" negative="sqlFilter">
+			<Value>no e-mail</Value>
+		</Condition>
+		<Condition name="agent1Id" operator="IN">
+			<Value>AI60000422</Value>
+			<Value>AI60000330</Value>
+			<Value>AI60000297</Value>
+			<Value>AI60000335</Value>
+			<Value>AI60000616</Value>
+			<Value>AI60000517</Value>
+			<Value>AI10001976</Value>
+			<Value>AI60000331</Value>
+			<Value>AI60000580</Value>
+			<Value>AI60000332</Value>
+			<Value>AI60000581</Value>
+			<Value>AI60000348</Value>
+			<Value>AI10002173</Value>
+			<Value>AI10002174</Value>
+			<Value>AI10002187</Value>
+			<Value>AI10002190</Value>
+			<Value>AI10002191</Value>
+			<Value>AI10002189</Value>
+			<Value>AI10002188</Value>
+			<Value>AI10002019</Value>
+		</Condition>
+		<Condition name="companyAuthorization" operator="=">
+			<Value>A</Value>
+		</Condition>
+	</Conditions>
+	<Fields>
+		<Field name="subjectID"/>
+		<Field name="firmName"/>
+		<Field name="agent1Id"/>
+		<Field name="agent2Id"/>
+		<Field name="email"/>
+		<Field name="isSupplier"/>
+		<Field name="isCustomer"/>
+		<Field name="isAgent"/>
+	</Fields>
+</Query>

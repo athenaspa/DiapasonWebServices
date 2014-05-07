@@ -1,0 +1,19 @@
+Utilizzo dei servizi
+
+Il web service di gestione della sessione fornisce i due metodi login() e logout() da chiamarsi rispettivamente all’inizio e alla fine della sessione di lavoro:
+
+…
+SessionWebService.SessionWebServiceService() diapasonSession = new SessionWebService.SessionWebServiceService();
+SessionWebService.session sessionInfo = new SessionWebService.session();
+sessionInfo.company = "01SIT01";
+sessionInfo.user = "DIAP60";
+sessionInfo.passwd = "DIAP60";
+sessionInfo.plant = "A";
+sessionInfo.language = "I";
+sessionInfo.location = "tst:per:std";
+sessionInfo.verbose = "1";
+sessionInfo.layout = "GMA;/;:;.;,;D;D;A;Y";
+sessionInfo.encoding = "ISO-8859-1";
+
+
+String sessionId = diapasonSession.login(sessionInfo);

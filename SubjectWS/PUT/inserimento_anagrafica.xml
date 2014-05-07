@@ -1,0 +1,665 @@
+
+$apiInput ='<GFITEMS>
+    <DATI-GENERALI-SOGGETTI>
+      <CODICE-SOGGETTO></CODICE-SOGGETTO>
+      <FLAG-FORNITORE>N</FLAG-FORNITORE>
+      <FLAG-CLIENTE>Y</FLAG-CLIENTE>
+      <FLAG-AGENTE>N</FLAG-AGENTE>'.
+		$ragione_sociale ."\n\t"
+      .'<TIPO>P</TIPO>
+      <VIA>'.$guest['Guest']['address'].'</VIA>
+      <ZONA></ZONA>
+      <CITTA>'.$guest['Guest']['city'].'</CITTA>
+      <PROVINCIA>'.$provincia.'</PROVINCIA>
+      <DESCR-PROVINCIA></DESCR-PROVINCIA>
+      <CAP>'.$guest['Guest']['zip'].'</CAP>
+      <NAZIONE>'.$nation_code.'</NAZIONE>
+      <DESCR-NAZIONE></DESCR-NAZIONE>
+      <STATO></STATO>
+      <DESCR-STATO></DESCR-STATO>
+      <TELEX>WEB</TELEX>
+      <TELEFAX></TELEFAX>
+      <N-TELEF>'.$billing_phone.'</N-TELEF>
+      <COGNOME-CONTABILE>'.$guest['Guest']['surname'].'</COGNOME-CONTABILE>
+      <NOME-CONTABILE>'.$guest['Guest']['name'].'</NOME-CONTABILE>
+      <CODICE-FISCALE>'.$cf.'</CODICE-FISCALE>
+      <PARTITA-IVA>'.$vat.'</PARTITA-IVA>
+      <DATA-AGGIOR-NTO></DATA-AGGIOR-NTO>
+      <PERSONA>'.$persona.'</PERSONA>
+      <NATO-IL></NATO-IL>
+      <ABILITAZIONE></ABILITAZIONE>
+      <QUALIFICA></QUALIFICA>
+      <RUOLO></RUOLO>
+      <HOLDING></HOLDING>
+      <AGGR-PER-AREA></AGGR-PER-AREA>
+      <AGGR-GRUP-AZIEND></AGGR-GRUP-AZIEND>
+      <ESENZIONE-IVA></ESENZIONE-IVA>
+      <NUMERO-PROT></NUMERO-PROT>
+      <DATA-PROT></DATA-PROT>
+      <TRATTAMENTO-IVA></TRATTAMENTO-IVA>
+      <CODICE-ISTAT></CODICE-ISTAT>
+      <ANAG-CONTABILE-1></ANAG-CONTABILE-1>
+      <DATA-ANAG-CONTABILE-1></DATA-ANAG-CONTABILE-1>
+      <CAT></CAT>
+      <ANAG-CONTABILE-2></ANAG-CONTABILE-2>
+      <DATA-ANAG-CONTABILE-2></DATA-ANAG-CONTABILE-2>
+    </DATI-GENERALI-SOGGETTI>
+  </GFITEMS>';
+
+	
+		
+		$apiInput = $this->Validator->parse_text($apiInput); 
+		$apiInput = strtoupper($apiInput); 
+		$apiInput = '<GFDSogAdd>'.$apiInput.'</GFDSogAdd>';
+		//$apiInput = utf8_encode($apiInput);
+		$apiOutput = $ws->execute($session_id,'GFDSogAdd',$apiInput);
+		$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+		
+
+	$xml = simplexml_load_string($apiOutput);
+	$array = (Array) $xml->GFITEMS;
+	
+	foreach($array as $item)
+	{
+				$vettore = (Array) $item;
+				$codice_soggetto = trim($vettore['CODICE-SOGGETTO']);
+				$ragione_sociale_1 = trim($vettore['R-SOCIALE']);
+				$ragione_sociale_2 = trim($vettore['R-SOCIALE-2']);
+				$via = trim($vettore['VIA']);
+				$citta = trim($vettore['CITTA']);
+				$cap = trim($vettore['CAP']);
+				$provincia  = trim($vettore['PROVINCIA']);
+				$descr_provincia  = trim($vettore['DESCR-PROVINCIA']);
+				$nazione = trim($vettore['NAZIONE']);
+				$descr_nazione =  trim($vettore['DESCR-NAZIONE']);
+				$tel = trim($vettore['N-TELEF']);
+				$cf = trim($vettore['CODICE-FISCALE']);
+				$piva = trim($vettore['PARTITA-IVA']);
+				
+	}	
+
+
+
+if ($tel) {
+	$apiInput ='<GFDForTxtAdd2>
+  <GFITEMS>
+    <NOTE-SOGGETTI>
+      <CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+      <CODICE-TESTO>DD</CODICE-TESTO>
+      <RIGA-TESTO1>Phone: '.$tel.'</RIGA-TESTO1>
+      <COMANDO>A1</COMANDO>
+    </NOTE-SOGGETTI>
+  </GFITEMS>
+</GFDForTxtAdd2>';
+
+$apiOutput = $ws->execute($session_id,'GFDForTxtAdd2',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+}
+
+
+$apiInput ='<GFDSogIndRep>
+	<GFITEMS>
+		<INDIRIZZI-SOGGETTI>
+			<CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+			<SEDE>A</SEDE>
+			<R-SOCIALE></R-SOCIALE>
+			<R-SOCIALE-2></R-SOCIALE-2>
+			<TIPO-INDIR></TIPO-INDIR>
+			<VIA></VIA>
+			<ZONA></ZONA>
+			<CITTA></CITTA>
+			<CAP></CAP>
+			<PROVINCIA></PROVINCIA>
+			<DESCR-PROVINCIA></DESCR-PROVINCIA>
+			<NAZIONE></NAZIONE>
+			<DESCR-NAZIONE></DESCR-NAZIONE>
+			<STATO></STATO>
+			<N-TELEF></N-TELEF>
+			<TELEX>WEB</TELEX>
+			<TELEFAX></TELEFAX>
+			<MAIL>'.$guest['Guest']['email'].'</MAIL>
+			<COD-FISCALE></COD-FISCALE>
+			<FORZATURA-COD-FISCALE></FORZATURA-COD-FISCALE>
+			<PARTITA-IVA></PARTITA-IVA>
+			<FORZATURA-PARTITA-IVA></FORZATURA-PARTITA-IVA>
+		</INDIRIZZI-SOGGETTI>
+	</GFITEMS>
+</GFDSogIndRep>';
+
+$apiOutput = $ws->execute($session_id,'GFDSogIndRep',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+//controllo se l'indirizzo di fatturazione è lo stesso della spedizione
+if (!preg_match('/'.strtoupper($this->Validator->parse_text($guest['GuestOrder'][0]['shipping_address'])).'/',$via)
+|| !preg_match('/'.strtoupper($this->Validator->parse_text($guest['GuestOrder'][0]['shipping_city'])).'/',$citta))	{
+	
+	$tmp = array();
+	
+		//ESTERO
+		if ($guest['GuestOrder'][0]['shipping_type_id']==2) {
+			$delivery_nation_code = $this->TBitem->getNationCode($guest['GuestOrder'][0]['ShippingZone']['name']);
+			$delivery_provincia = "";
+			$delivery_phone = $this->__PhoneSanitizer($guest['GuestOrder'][0]['shipping_tel'], $guest['GuestOrder'][0]['ShippingZone']['name']);
+		} 
+		//ITALIA
+		elseif ($guest['GuestOrder'][0]['shipping_type_id']==1) {
+			$delivery_nation_code = '001';
+			$delivery_provincia = $this->TBitem->getProvinceCode($guest['GuestOrder'][0]['ShippingZone']['name']);
+			$delivery_phone = $guest['GuestOrder'][0]['shipping_tel'];
+		}
+		
+		$tmp['shipping_header'] = $this->Validator->parse_text($guest['GuestOrder'][0]['shipping_header']);
+		$tmp['shipping_co'] = $this->Validator->parse_text($guest['GuestOrder'][0]['shipping_co']);
+		$tmp['shipping_address'] = $this->Validator->parse_text($guest['GuestOrder'][0]['shipping_address']);
+		$tmp['shipping_city'] = $this->Validator->parse_text($guest['GuestOrder'][0]['shipping_city']);
+
+$apiInput ='<GFDCliIndAdd>
+	<GFITEMS>
+		<INDIRIZZI-SOGGETTI>
+			<CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+			<DESCR-CODICE-SOGGETTO></DESCR-CODICE-SOGGETTO>
+			<TIPO-SOGG>P</TIPO-SOGG>
+			<SEDE>1</SEDE>
+			<R-SOCIALE>'.strtoupper($tmp['shipping_header']).'</R-SOCIALE>
+			<R-SOCIALE-2>'.strtoupper($tmp['shipping_co']).'</R-SOCIALE-2>
+			<TIPO-INDIR></TIPO-INDIR>
+			<VIA>'.strtoupper($tmp['shipping_address']).'</VIA>
+			<ZONA></ZONA>
+			<CITTA>'.strtoupper($tmp['shipping_city']).'</CITTA>
+			<CAP>'.strtoupper($guest['GuestOrder'][0]['shipping_zip']).'</CAP>
+			<PROVINCIA>'.$delivery_provincia.'</PROVINCIA>
+			<NAZIONE>'.$delivery_nation_code.'</NAZIONE>
+			<STATO></STATO>
+			<N-TELEF>'.$delivery_phone.'</N-TELEF>
+			<TELEX>WEB</TELEX>
+			<TELEFAX></TELEFAX>
+			<MAIL>'.$guest['GuestOrder'][0]['shipping_email'].'</MAIL>
+			<CODICE-FISCALE></CODICE-FISCALE>
+			<PARTITA-IVA></PARTITA-IVA>
+		</INDIRIZZI-SOGGETTI>
+	</GFITEMS>
+</GFDCliIndAdd>';
+$apiOutput = $ws->execute($session_id,'GFDCliIndAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+unset($tmp);
+}
+
+
+$apiInput = '<GFDANK1Add>
+	<GFITEMS>
+		<INDIRIZZI-MAIL-CLIENTI>
+			<CLIENTE>'.$codice_soggetto.'</CLIENTE>
+			<SEQUENZA2>1</SEQUENZA2>
+			<INDIRIZZO-MAIL1-2>'.$guest['Guest']['email'].'</INDIRIZZO-MAIL1-2>
+			<INDIRIZZO-MAIL2-2></INDIRIZZO-MAIL2-2>
+		</INDIRIZZI-MAIL-CLIENTI>
+	</GFITEMS>
+</GFDANK1Add>';
+
+$apiOutput = $ws->execute($session_id,'GFDANK1Add',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$apiInput = '<GFDANK2Add>
+	<GFITEMS>
+		<LEGAMI-INDIRIZZI-MAIL-CLIENTE>
+			<CLIENTE>'.$codice_soggetto.'</CLIENTE>
+			<INDIRIZZO2>***</INDIRIZZO2>
+			<ORDINE-VENDITA2>1</ORDINE-VENDITA2>
+			<BOLLA-SPEDIZIONE2>1</BOLLA-SPEDIZIONE2>
+			<FATTURA2>1</FATTURA2>
+			<ORDINE-ACQUISTO2>1</ORDINE-ACQUISTO2>
+			<OPZIONALE2>1</OPZIONALE2>
+			<NOTE2> </NOTE2>
+		</LEGAMI-INDIRIZZI-MAIL-CLIENTE>
+	</GFITEMS>
+</GFDANK2Add>';
+
+$apiOutput = $ws->execute($session_id,'GFDANK2Add',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$apiInput ='<GFDSogDatAziAdd>
+  <GFITEMS>
+    <DATI-AZIENDALI-SOGGETTI>
+      <CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+      <ABILITAZIONE>A</ABILITAZIONE>
+      <QUALIFICA></QUALIFICA>
+      <RUOLO>RU</RUOLO>
+      <ESENZIONE-IVA>'.$esenzione.'</ESENZIONE-IVA>
+      <NRO-PROTOCOLLO></NRO-PROTOCOLLO>
+      <DATA-PROTOCOLLO></DATA-PROTOCOLLO>
+      <TRATTAMENTO-IVA></TRATTAMENTO-IVA>
+    </DATI-AZIENDALI-SOGGETTI>
+  </GFITEMS>
+</GFDSogDatAziAdd>';
+
+$apiOutput = $ws->execute($session_id,'GFDSogDatAziAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$resa = $this->CheckSubject->checkSubjectYield($order_var);
+
+$apiInput ='<GFDCliCondAdd>
+  <GFITEMS>
+    <CONDIZIONI-DI-VENDITA>
+      <TIPOLOGIA-CONDIZIONI>99</TIPOLOGIA-CONDIZIONI>
+      <CHIAVE-1>'.$codice_soggetto.'</CHIAVE-1>
+      <CHIAVE-2>02</CHIAVE-2>
+      <CHIAVE-3></CHIAVE-3>
+      <CHIAVE-4></CHIAVE-4>
+      <DECORRENZA>'.date('dmy').'</DECORRENZA>
+      <TIPO-PAGAMENTO>PAG</TIPO-PAGAMENTO>
+      <VALUTA>EUR</VALUTA>
+      <SCADENZA>311270</SCADENZA>
+      <CONDIZIONI-PAGAMENTO>C01</CONDIZIONI-PAGAMENTO>
+      <CHIUSURA-PRECEDENTE>N</CHIUSURA-PRECEDENTE>
+      <CONDIZIONI-RESA>'.$resa.'</CONDIZIONI-RESA>
+      <TIPO-CONDIZIONI>S</TIPO-CONDIZIONI>
+      <MEZZO-SPEDIZIONE>999</MEZZO-SPEDIZIONE>
+      <IMBALLO>COST</IMBALLO>
+      <RICARICA-LISTINI>N</RICARICA-LISTINI>
+      <ASSICURAZIONE></ASSICURAZIONE>
+      <RICARICA-SCONTI>N</RICARICA-SCONTI>
+      <TIPO-GARANZIA></TIPO-GARANZIA>
+      <SPESE>0</SPESE>
+      <PAGAMENTO-EVENTI></PAGAMENTO-EVENTI>
+      <CLASSE-CAMPAGNE></CLASSE-CAMPAGNE>
+      <SCONTI-1></SCONTI-1>
+      <SCONTI-2></SCONTI-2>
+    </CONDIZIONI-DI-VENDITA>
+  </GFITEMS>
+</GFDCliCondAdd>';
+
+$apiOutput = $ws->execute($session_id,'GFDCliCondAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$zone_raw = $this->TBitem->getArea_ZoneCode($guest['ShippingZone']['name']); 
+if ($zone_raw != "") {
+$area = trim(substr($zone_raw, 0, 4));
+$zona = trim(substr($zone_raw, -4));
+}
+
+if ($lang == 'IT') { $l = 'I';} else { $l = 'E';} 
+
+$apiInput ='<GFDOrdCliDatComAdd>
+	<GFITEMS>
+		<DATI-GESTIONALI-CLIENTE>
+			<CLIENTE>'.$codice_soggetto.'</CLIENTE>
+			<DIVISIONE-COMMERCIALE>02</DIVISIONE-COMMERCIALE>
+			<TIPOLOGIA-CLIENTE>20</TIPOLOGIA-CLIENTE>
+			<LINGUA>'.$l.'</LINGUA>
+			<STAMPA>1</STAMPA>
+			<MAGAZZINO-SPED>2-SPED</MAGAZZINO-SPED>
+			<MAGAZZINO-CONTO-LAVORO></MAGAZZINO-CONTO-LAVORO>
+			<AREA>'.$area.'</AREA>
+			<ZONA>'.$zona.'</ZONA>
+			<TIPO-CONDIZIONI>99</TIPO-CONDIZIONI>
+			<ABILITAZIONE>A</ABILITAZIONE>
+			<PRIMO-AGENTE></PRIMO-AGENTE>
+			<CATEG-PROVV></CATEG-PROVV>
+			<DESCR-PRIMO-AGENTE></DESCR-PRIMO-AGENTE>
+			<COMMESSA-CONTO-LAVORO></COMMESSA-CONTO-LAVORO>
+			<SECONDO-AGENTE></SECONDO-AGENTE>
+			<CATEG-PROVV-AG2></CATEG-PROVV-AG2>
+			<DESCR-SECONDO-AGENTE></DESCR-SECONDO-AGENTE>
+			<ZONA-VENDITA></ZONA-VENDITA>
+			<PRIMO-LISTINO>NL</PRIMO-LISTINO>
+			<CLASSE-CLIENTE></CLASSE-CLIENTE>
+			<SECONDO-LISTINO></SECONDO-LISTINO>
+			<CLASSE-CLIENTE2></CLASSE-CLIENTE2>
+			<TABELLA-SCONTI></TABELLA-SCONTI>
+			<CLASSE-CLIENTE3></CLASSE-CLIENTE3>
+			<TIPO-CANVASS></TIPO-CANVASS>
+			<ATTIVAZIONE-SSCC>N</ATTIVAZIONE-SSCC>
+			<CAMPAGNE></CAMPAGNE>
+			<VALUTA>EUR</VALUTA>
+			<TIPO-PAGAMENTO></TIPO-PAGAMENTO>
+			<COND-PAGAMENTO></COND-PAGAMENTO>
+			<SPESE-0-1-2-3>0</SPESE-0-1-2-3>
+			<RESA></RESA>
+			<CLASSE-CAMPAGNE></CLASSE-CAMPAGNE>
+			<MEZZO-SPED></MEZZO-SPED>
+		</DATI-GESTIONALI-CLIENTE>
+	</GFITEMS>
+</GFDOrdCliDatComAdd>';
+
+$apiOutput = $ws->execute($session_id,'GFDOrdCliDatComAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+if ($lang == 'IT') { $sogg = 'CI';} else { $sogg = 'CE';} 
+
+$apiInput ='<GFDSogFMFCRepAuto>
+  <GFITEMS>
+    <DATI-GENERALI-SOGGETTI>
+      <CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+      <FLAG-FORNITORE></FLAG-FORNITORE>
+      <FLAG-CLIENTE></FLAG-CLIENTE>
+      <FLAG-AGENTE></FLAG-AGENTE>
+      <R-SOCIALE></R-SOCIALE>
+      <R-SOCIALE-2></R-SOCIALE-2>
+      <TIPO></TIPO>
+      <VIA></VIA>
+      <ZONA></ZONA>
+      <CITTA></CITTA>
+      <PROVINCIA></PROVINCIA>
+      <CAP></CAP>
+      <NAZIONE></NAZIONE>
+      <STATO></STATO>
+      <TELEX></TELEX>
+      <TELEFAX></TELEFAX>
+      <N-TELEF></N-TELEF>
+      <COGNOME-CONTABILE></COGNOME-CONTABILE>
+      <NOME-CONTABILE></NOME-CONTABILE>
+      <CODICE-FISCALE></CODICE-FISCALE>
+      <FLAG-FORZ-CF></FLAG-FORZ-CF>
+      <PARTITA-IVA></PARTITA-IVA>
+      <FLAG-FORZ-PIVA></FLAG-FORZ-PIVA>
+      <DATA-AGGIOR-NTO></DATA-AGGIOR-NTO>
+      <PERSONA></PERSONA>
+      <NATO-IL></NATO-IL>
+      <ABILITAZIONE></ABILITAZIONE>
+      <QUALIFICA></QUALIFICA>
+      <RUOLO></RUOLO>
+      <HOLDING></HOLDING>
+      <AGGR-PER-AREA></AGGR-PER-AREA>
+      <AGGR-GRUP-AZIEND></AGGR-GRUP-AZIEND>
+      <AGGR-GRUP-AZIEND-DESCR></AGGR-GRUP-AZIEND-DESCR>
+      <ESENZIONE-IVA></ESENZIONE-IVA>
+      <NUMERO-PROT></NUMERO-PROT>
+      <DATA-PROT></DATA-PROT>
+      <TRATTAMENTO-IVA></TRATTAMENTO-IVA>
+      <CODICE-ISTAT></CODICE-ISTAT>
+      <ANAG-CONTABILE-1>'.$codice_soggetto.'</ANAG-CONTABILE-1>
+      <DATA-ANAG-CONTABILE-1>'.date('dmy').'</DATA-ANAG-CONTABILE-1>
+      <ANAG-CONTABILE-2></ANAG-CONTABILE-2>
+      <DATA-ANAG-CONTABILE-2></DATA-ANAG-CONTABILE-2>
+    </DATI-GENERALI-SOGGETTI>
+    <CERTIFICAZIONE-ANAGRAFICA-SOGGETTI>
+      <ANAGRAFICA>'.$codice_soggetto.'</ANAGRAFICA>
+      <DESCRIZIONE-BREVE>'.$ragione_sociale_1.'</DESCRIZIONE-BREVE>
+      <PIANO-CONTI>CG</PIANO-CONTI>
+      <TIPO-SOGGETTO>'.$sogg.'</TIPO-SOGGETTO>
+      <CONTO-FM>'.$codice_soggetto.'</CONTO-FM>
+      <VALUTA>EUR</VALUTA>
+      <MEZZO-PAGAMENTO></MEZZO-PAGAMENTO>
+      <TRATTAMENTO-IVA>'.$trattamento_iva.'</TRATTAMENTO-IVA>
+      <LINGUA>'.$l.'</LINGUA>
+      <CLASSE>A</CLASSE>
+      <MERCATO></MERCATO>
+      <MODALITA-PAGAMENTO>PAG</MODALITA-PAGAMENTO>
+      <NAZIONE></NAZIONE>
+      <BANCA-APPOGGIO></BANCA-APPOGGIO>
+      <CONDIZIONI-PAGAMENTO>C01</CONDIZIONI-PAGAMENTO>
+      <CIN></CIN>
+      <CC></CC>
+      <CHECK-DIGIT></CHECK-DIGIT>
+      <STATISTICI-DI-CONTO-1></STATISTICI-DI-CONTO-1>
+      <DESCR-STATISTICI-DI-CONTO-1></DESCR-STATISTICI-DI-CONTO-1>
+      <STATISTICI-DI-CONTO-2></STATISTICI-DI-CONTO-2>
+      <DESCR-STATISTICI-DI-CONTO-2></DESCR-STATISTICI-DI-CONTO-2>
+      <STATISTICI-DI-CONTO-3></STATISTICI-DI-CONTO-3>
+      <DESCR-STATISTICI-DI-CONTO-3></DESCR-STATISTICI-DI-CONTO-3>
+      <STATISTICI-DI-CONTO-4></STATISTICI-DI-CONTO-4>
+      <DESCR-STATISTICI-DI-CONTO-4></DESCR-STATISTICI-DI-CONTO-4>
+      <STATISTICI-DI-CONTO-5></STATISTICI-DI-CONTO-5>
+      <DESCR-STATISTICI-DI-CONTO-5></DESCR-STATISTICI-DI-CONTO-5>
+      <STATISTICI-DI-CONTO-6></STATISTICI-DI-CONTO-6>
+      <DESCR-STATISTICI-DI-CONTO-6></DESCR-STATISTICI-DI-CONTO-6>
+      <STATISTICI-DI-CONTO-7></STATISTICI-DI-CONTO-7>
+      <DESCR-STATISTICI-DI-CONTO-7></DESCR-STATISTICI-DI-CONTO-7>
+      <STATISTICI-DI-CONTO-8></STATISTICI-DI-CONTO-8>
+      <DESCR-STATISTICI-DI-CONTO-8></DESCR-STATISTICI-DI-CONTO-8>
+      <STATISTICI-ANAGRAFICI-1></STATISTICI-ANAGRAFICI-1>
+      <DESCR-STATISTICI-ANAGRAFICI-1></DESCR-STATISTICI-ANAGRAFICI-1>
+      <STATISTICI-ANAGRAFICI-2></STATISTICI-ANAGRAFICI-2>
+      <DESCR-STATISTICI-ANAGRAFICI-2></DESCR-STATISTICI-ANAGRAFICI-2>
+      <STATISTICI-ANAGRAFICI-3></STATISTICI-ANAGRAFICI-3>
+      <DESCR-STATISTICI-ANAGRAFICI-3></DESCR-STATISTICI-ANAGRAFICI-3>
+      <STATISTICI-ANAGRAFICI-4></STATISTICI-ANAGRAFICI-4>
+      <DESCR-STATISTICI-ANAGRAFICI-4></DESCR-STATISTICI-ANAGRAFICI-4>
+      <STATISTICI-ANAGRAFICI-5></STATISTICI-ANAGRAFICI-5>
+      <DESCR-STATISTICI-ANAGRAFICI-5></DESCR-STATISTICI-ANAGRAFICI-5>
+      <STATISTICI-ANAGRAFICI-6></STATISTICI-ANAGRAFICI-6>
+      <DESCR-STATISTICI-ANAGRAFICI-6></DESCR-STATISTICI-ANAGRAFICI-6>
+      <SESSO-M-F></SESSO-M-F>
+      <RAGGRUPPAMENTO-TRIBUTARIO></RAGGRUPPAMENTO-TRIBUTARIO>
+      <C770></C770>
+      <MODALITA-PAGAMENTO-F></MODALITA-PAGAMENTO-F>
+      <CONDIZIONI-PAGAMENTO-F></CONDIZIONI-PAGAMENTO-F>
+      <DATA-DI-NASCITA></DATA-DI-NASCITA>
+      <COMUNE-DI-NASCITA></COMUNE-DI-NASCITA>
+      <PROVINCIA-DI-NASCITA></PROVINCIA-DI-NASCITA>
+      <INDIRIZZO></INDIRIZZO>
+      <CAP></CAP>
+      <COMUNE></COMUNE>
+      <PROVINCIA></PROVINCIA>
+      <POLITICA></POLITICA>
+      <MODALITA-PAGAMENTO-C></MODALITA-PAGAMENTO-C>
+      <CONDIZIONI-PAGAMENTO-C></CONDIZIONI-PAGAMENTO-C>
+    </CERTIFICAZIONE-ANAGRAFICA-SOGGETTI>
+  </GFITEMS>
+</GFDSogFMFCRepAuto>'; //debug($apiInput);
+
+$apiOutput = $ws->execute($session_id,'GFDSogFMFCRepAuto',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+
+$apiInput = '<GFDCliAmmiDataRep>
+  <GFITEMS>
+    <DATI-AMMINISTRATIVI-CLIENTE>
+      <CLIENTE>'.$codice_soggetto.'</CLIENTE>
+      <BANCA-INOLTRO></BANCA-INOLTRO>
+      <BANCA-APPOGGIO></BANCA-APPOGGIO>
+      <STATO-BANCA></STATO-BANCA>
+      <ABI-CAB></ABI-CAB>
+      <CONTO></CONTO>
+      <CIN></CIN>
+      <FIDO></FIDO>
+      <ABILITAZIONE-AMMINISTRATIVA>A</ABILITAZIONE-AMMINISTRATIVA>
+    </DATI-AMMINISTRATIVI-CLIENTE>
+  </GFITEMS>
+</GFDCliAmmiDataRep>';
+
+$apiOutput = $ws->execute($session_id,'GFDCliAmmiDataRep',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+ 
+
+$apiInput = '<GFDCliDiviDataRep>
+  <GFITEMS>
+    <DATI-COMMERCIALI-CLIENTE>
+      <CLIENTE>'.$codice_soggetto.'</CLIENTE>
+      <CIN></CIN>
+      <DIVISIONE-COMMERCIALE></DIVISIONE-COMMERCIALE>
+    </DATI-COMMERCIALI-CLIENTE>
+    <DATI-DIVISIONALI-CLIENTE>
+      <CENTRO-COMMERCIALE></CENTRO-COMMERCIALE>
+      <RESPONSABILE-COMMERCIALE></RESPONSABILE-COMMERCIALE>
+      <AREA></AREA>
+      <PRIORITA-EVASIONE>50</PRIORITA-EVASIONE>
+      <MAGAZZINO-SPEDIZIONE>2-SPED</MAGAZZINO-SPEDIZIONE>
+      <TIPO-CONDIZIONI-GENERALI>99</TIPO-CONDIZIONI-GENERALI>
+      <ABILITAZIONE-COMMERCIALE>A</ABILITAZIONE-COMMERCIALE>
+      <EVASIONE-PARZIALE>Y</EVASIONE-PARZIALE>
+      <DISTINTA-CLIENTI>N</DISTINTA-CLIENTI>
+      <AGGREGAZIONE-ORDINI>C</AGGREGAZIONE-ORDINI>
+      <PRIMO-AGENTE></PRIMO-AGENTE>
+      <DESCR-PRIMO-AGENTE></DESCR-PRIMO-AGENTE>
+      <CATEGORIA-PROVVIGIONI1></CATEGORIA-PROVVIGIONI1>
+      <SECONDO-AGENTE></SECONDO-AGENTE>
+      <DESCR-SECONDO-AGENTE></DESCR-SECONDO-AGENTE>
+      <CATEGORIA-PROVVIGIONI2></CATEGORIA-PROVVIGIONI2>
+      <ZONA-VENDITA></ZONA-VENDITA>
+    </DATI-DIVISIONALI-CLIENTE>
+  </GFITEMS>
+</GFDCliDiviDataRep>';
+
+$apiOutput = $ws->execute($session_id,'GFDCliDiviDataRep',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$apiInput ='<GFDOrdCliDatComRep>
+	<GFITEMS>
+		<DATI-GESTIONALI-CLIENTE>
+			<CLIENTE>'.$codice_soggetto.'</CLIENTE>
+			<DIVISIONE-COMMERCIALE></DIVISIONE-COMMERCIALE>
+			<TIPOLOGIA-CLIENTE></TIPOLOGIA-CLIENTE>
+			<LINGUA></LINGUA>
+			<STAMPA></STAMPA>
+			<MAGAZZINO-SPED></MAGAZZINO-SPED>
+			<MAG-C-L></MAG-C-L>
+			<AREA></AREA>
+			<ZONA></ZONA>
+			<TIPO-CONDIZIONI></TIPO-CONDIZIONI>
+			<ABILITAZIONE></ABILITAZIONE>
+			<PRIMO-AGENTE>315</PRIMO-AGENTE>
+			<CATEG-PROVV>NP</CATEG-PROVV>
+			<COMMESSA></COMMESSA>
+			<SECONDO-AGENTE></SECONDO-AGENTE>
+			<CATEG-PROVV-AG2></CATEG-PROVV-AG2>
+			<ZONA-VENDITA></ZONA-VENDITA>
+			<PRIMO-LISTINO></PRIMO-LISTINO>
+			<CLASSE-CLIENTE></CLASSE-CLIENTE>
+			<SECONDO-LISTINO></SECONDO-LISTINO>
+			<CLASSE-CLIENTE2></CLASSE-CLIENTE2>
+			<TABELLA-SCONTI>99</TABELLA-SCONTI>
+			<CLASSE-CLIENTE3></CLASSE-CLIENTE3>
+			<TIPO-CANVAS></TIPO-CANVAS>
+			<SSCC></SSCC>
+			<VALUTA></VALUTA>
+			<TIPO-PAGAMENTO></TIPO-PAGAMENTO>
+			<COND-PAGAMENTO></COND-PAGAMENTO>
+			<SPESE-0-1-2-3></SPESE-0-1-2-3>
+			<RESA></RESA>
+			<CLASSE-CAMPAGNE></CLASSE-CAMPAGNE>
+			<MEZZO-SPED></MEZZO-SPED>
+		</DATI-GESTIONALI-CLIENTE>
+	</GFITEMS>
+</GFDOrdCliDatComRep>';
+
+$apiOutput = $ws->execute($session_id,'GFDOrdCliDatComRep',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+ 
+
+
+
+
+if ($lang == 'IT') { $percorso = 'WBSIT';} else { $percorso = 'WBSEST';} 
+
+$apiInput ='<GFDLegVetPerAdd>
+  <GFITEMS>
+    <DEFINIZIONE-GIRO-TRASPORTI>
+      <TIPO2>C</TIPO2>
+      <CODICE2>'.$codice_soggetto.'</CODICE2>
+      <INDIRIZZO2></INDIRIZZO2>
+      <TIPO3></TIPO3>
+      <CODICE3></CODICE3>
+      <INDIRIZZO3></INDIRIZZO3>
+      <TIPO4></TIPO4>
+      <CODICE4></CODICE4>
+      <INDIRIZZO4></INDIRIZZO4>
+      <TIPO5></TIPO5>
+      <CODICE5></CODICE5>
+      <INDIRIZZO5></INDIRIZZO5>
+      <TIPO6></TIPO6>
+      <CODICE6></CODICE6>
+      <INDIRIZZO6></INDIRIZZO6>
+      <TIPO7></TIPO7>
+      <CODICE7></CODICE7>
+      <INDIRIZZO7></INDIRIZZO7>
+      <TIPO8></TIPO8>
+      <CODICE8></CODICE8>
+      <INDIRIZZO8></INDIRIZZO8>
+      <TIPO9></TIPO9>
+      <CODICE9></CODICE9>
+      <INDIRIZZO9></INDIRIZZO9>
+      <TIPO10></TIPO10>
+      <CODICE10></CODICE10>
+      <INDIRIZZO10></INDIRIZZO10>
+      <TIPO11></TIPO11>
+      <CODICE11></CODICE11>
+      <INDIRIZZO11></INDIRIZZO11>
+      <TIPO12></TIPO12>
+      <CODICE12></CODICE12>
+      <INDIRIZZO12></INDIRIZZO12>
+      <TIPO13></TIPO13>
+      <CODICE13></CODICE13>
+      <INDIRIZZO13></INDIRIZZO13>
+      <TIPO14></TIPO14>
+      <CODICE14></CODICE14>
+      <INDIRIZZO14></INDIRIZZO14>
+      <TIPO15></TIPO15>
+      <CODICE15></CODICE15>
+      <INDIRIZZO15></INDIRIZZO15>
+    </DEFINIZIONE-GIRO-TRASPORTI>
+    <COLLEGAMENTO-PERCORSI-VETTORI>
+      <PERCORSO>'.$percorso.'</PERCORSO>
+      <DATA-INIZIO>010114</DATA-INIZIO>
+    </COLLEGAMENTO-PERCORSI-VETTORI>
+  </GFITEMS>
+</GFDLegVetPerAdd>';
+
+$apiOutput = $ws->execute($session_id,'GFDLegVetPerAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$apiInput ='<GFDLegVetTesRel>
+  <GFITEMS>
+    <COLLEGAMENTO-PERCORSI-VETTORI>
+      <PERCORSO>'.$percorso.'</PERCORSO>
+      <DATA-INIZIO>010114</DATA-INIZIO>
+    </COLLEGAMENTO-PERCORSI-VETTORI>
+  </GFITEMS>
+</GFDLegVetTesRel>';
+
+$apiOutput = $ws->execute($session_id,'GFDLegVetTesRel',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+if ($lang == 'IT') { $tipo_stampa = 1;} else { $tipo_stampa = 4;} 
+
+$apiInput ='<GFDCliCommDataRep>
+  <GFITEMS>
+    <DATI-COMMERCIALI-CLIENTE>
+      <CLIENTE>'.$codice_soggetto.'</CLIENTE>
+      <TIPOLOGIA-CLIENTE></TIPOLOGIA-CLIENTE>
+      <LINGUA></LINGUA>
+      <AREA-NIELSEN></AREA-NIELSEN>
+      <CLIENTE-FATTURAZIONE></CLIENTE-FATTURAZIONE>
+      <INIZIO-RAPPORTO></INIZIO-RAPPORTO>
+      <FINE-RAPPORTO></FINE-RAPPORTO>
+      <TIPO-FATTURAZIONE>0</TIPO-FATTURAZIONE>
+      <CADENZA-FATTURAZIONE></CADENZA-FATTURAZIONE>
+      <TIPO-STAMPA>'.$tipo_stampa.'</TIPO-STAMPA>
+      <NUMERO-COPIE></NUMERO-COPIE>
+      <VETTORE></VETTORE>
+      <SPEDIZIONIERE></SPEDIZIONIERE>
+      <BANCA-INOLTRO></BANCA-INOLTRO>
+      <BANCA-APPOGGIO></BANCA-APPOGGIO>
+      <STATO-BANCA></STATO-BANCA>
+      <ABI-CAB></ABI-CAB>
+      <CONTO></CONTO>
+      <CIN></CIN>
+    </DATI-COMMERCIALI-CLIENTE>
+  </GFITEMS>
+</GFDCliCommDataRep>';
+
+$apiOutput = $ws->execute($session_id,'GFDCliCommDataRep',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;
+
+
+$apiInput ='<GFDSogAttAggValAdd>
+  <GFITEMS>
+    <VALORI-ATTRIBUTI-SOGGETTO>
+      <CODICE-SOGGETTO>'.$codice_soggetto.'</CODICE-SOGGETTO>
+      <ATTRIBUTO>Cliente automotive</ATTRIBUTO>
+      <VALORE-ATTRIBUTO>N</VALORE-ATTRIBUTO>
+    </VALORI-ATTRIBUTI-SOGGETTO>
+  </GFITEMS>
+</GFDSogAttAggValAdd>';
+
+$apiOutput = $ws->execute($session_id,'GFDSogAttAggValAdd',$apiInput);
+$dapi_input_debug.= $apiInput; $dapi_output_debug.= $apiOutput;

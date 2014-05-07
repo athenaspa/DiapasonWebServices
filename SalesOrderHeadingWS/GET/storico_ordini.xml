@@ -1,0 +1,24 @@
+<Query name="OrderShipments" orderBy="1" pagesize="0" service="SalesOrderHeading" count="yes">
+	<Conditions>
+		<Condition name="customerCode" operator="=">
+			<Value>'.arg(3).'</Value>
+		</Condition>
+	</Conditions>
+	<Fields>
+		<Field name="orderNumber"/>
+		<Field name="company"/>
+		<Field name="issueDate"/>
+		<Field name="requestedDeliveryDate"/>
+		<Field name="orderRow"/>
+		<Field name="deliverySequence"/>
+		<Field name="itemCode"/>
+		<Field name="shippingDate"/>
+		<Field name="preShipmentQuantity"/>
+		<Field name="requestedQuantity"/>
+		<Field name="shipmentNumber"/>
+		<Field name="quantity"/>
+		<Field name="plannedDate"/>
+		<Field name="customerCode"/>
+		<Field name="itemDescription"/>
+	</Fields>
+</Query>
