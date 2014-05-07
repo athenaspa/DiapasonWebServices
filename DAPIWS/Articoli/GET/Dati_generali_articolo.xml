@@ -1,0 +1,16 @@
+<!-- 
+	INTERROGAZIONE DETTAGLI GENERALI ARTICOLO
+	Questa API interroga Diapason e restituisce alcuni dettagli relativi agli articoli
+	
+@param $sku {stringa} codice identificativo univoco dell'articolo all'interno di diapason
+
+-->
+
+
+<GFDArtGet>
+  <GFITEMS>
+    <DATI-GENERALI-ARTICOLI>
+      <CODICE-ARTICOLO>$sku</CODICE-ARTICOLO>
+    </DATI-GENERALI-ARTICOLI>
+  </GFITEMS>
+</GFDArtGet>

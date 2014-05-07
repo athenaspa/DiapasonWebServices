@@ -1,0 +1,13 @@
+<!-- 
+	INTERROGAZIONE INDIRIZZI DI SPEDIZIONE
+	Questa API interroga Diapason e restituisce tutti gli indirizzi di spedizione associati al soggetto
+	
+@param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
+-->
+<GFDSogIndLis>
+	<GFITEMS>
+		<INDIRIZZI-SOGGETTI>
+			<CODICE-SOGGETTO>$codice_soggetto</CODICE-SOGGETTO>
+		</INDIRIZZI-SOGGETTI>
+	</GFITEMS>
+</GFDSogIndLis>

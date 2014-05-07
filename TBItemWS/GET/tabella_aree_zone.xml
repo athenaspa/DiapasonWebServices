@@ -1,3 +1,10 @@
+<!--
+	Tabelle funzionali di Diapason da interrogare per ottenere valori di decodifica di alcune informazioni
+	
+	AREA / ZONA
+	-->
+
+
 <Query name="Lista-area-zona" orderBy="1" pagesize="0" service="TBitem" count="yes">
     <Fields>
         <Field name="zone"/>

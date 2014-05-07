@@ -1,7 +1,15 @@
+<!--
+	INTERROGAZIONE TESTATE D'ORDINE PER CODICE SOGGETTO
+	La query sul db parte dagli ordini inseriti da gennaio 2013 in poi
+	
+	@param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
+	-->
+
+
 <Query name="OrderShipments" orderBy="1" pagesize="0" service="SalesOrderHeading" count="yes">
 	<Conditions>
 		<Condition name="customerCode" operator="=">
-			<Value>'.arg(3).'</Value>
+			<Value>$codice_soggetto</Value>
 		</Condition>
 	</Conditions>
 	<Fields>
