@@ -1,0 +1,103 @@
+## Resource properties
+
+@param $causale {string} causale dell'ordine: "V" = Vendita, "K" = omaggio rivalsa IVA
+@param $giro {string}  identificativo della tipologia dell'ordine: "MMD" ordini clienti assodati Aftermarket, "AFP" = ordini clienti guest Aftermarket, "DIS" = ordini clienti assodati Distribuzione, "DSP" = ordini clienti guest Distribuzione.
+@param $intestario {string} codice del soggetto che lo identifica dentro a diapason
+@param $destinatario {string} codice del soggetto che lo identifica dentro a diapason
+@param $indirizzo_destinatario {string} codice univoco che indentifica l'indirizzo di spedizione presente a Diapason. "A" = indirizzo di default, "1" = indirizzo 1, "2" indirizzo due
+@param $rif_cliente {string} stringa univoca di 30 carattere (può essere a discrezione del cliente)
+@param $data_riferimento_cliente {string} data di inserimento dell'ordine formato GGMMAA
+@param $data_richiesta_consegna {string} data di richiesta consegna formato GGMMAA
+@param $agente {string}  codice dell'agente,  valore di default: 315, "Agente online". E' possibile lasciare vuoto il campo
+@param $cat_prov_agente {string} categoria provvigioni dell'agente (obbligatorio se si specifica l'agente)
+@param $articolo {string} SKU articolo
+@param $qta {string} quantità 
+@param GFDOrdCliTesAdd API che aggiunge una testata d'ordine 
+@param GFDOrdCliRigAdd API che inserisce le righe dell'ordine. Non ci sono limiti <RIGHE-DORDINE-E-OFFERTA></RIGHE-DORDINE-E-OFFERTA> inseribili
+
+Interfacciandosi a Diapason tramite queste due api si inserisce un'ordine.
+
+~~~~
+XML
+    <Inputs>
+      <API>
+      <Input>
+      <GFDOrdCliTesAdd>
+      <GFITEMS>
+               <DATI-TESTATA-DORDINE>
+                              <DIVISIONE-COMMERCIALE>02</DIVISIONE-COMMERCIALE>
+                              <CAUSALE>$causale</CAUSALE>
+                              <TIPO-ORD></TIPO-ORD>
+                              <MARCHIO></MARCHIO>
+                              <GIRO>giro</GIRO>
+                              <EVASIONE-PARZIALE></EVASIONE-PARZIALE>
+                              <ORDINE-AGGREGABILE></ORDINE-AGGREGABILE>
+                              <INTESTATARIO>$intestario</INTESTATARIO>
+                              <IND-INTESTATARIO></IND-INTESTATARIO>
+                              <DESTINATARIO>$destinatario</DESTINATARIO>
+                              <IND-DESTINATARIO>$indirizzo_destinatario</IND-DESTINATARIO>
+                              <RIF-CLIENTE>$rif_cliente</RIF-CLIENTE>
+                              <DATA-RIFERIMENTO-CLIENTE>$data_riferimento_cliente</DATA-RIFERIMENTO-CLIENTE>
+                              <TRASPORTO-GG></TRASPORTO-GG>
+                              <DATA-RICHIESTA-CONSEGNA>$data_richiesta_consegna</DATA-RICHIESTA-CONSEGNA>
+                              <TASS></TASS>
+                              <LINGUA></LINGUA>
+                              <PRIOR></PRIOR>
+                              <DATA-RICHIESTA-SPEDIZIONE></DATA-RICHIESTA-SPEDIZIONE>
+                              <COMMESSA></COMMESSA>
+                              <DATA-RICERCA-LISTINI></DATA-RICERCA-LISTINI>
+                              <COMMESSA-CONTABILE></COMMESSA-CONTABILE>
+                              <MAGAZZINO-SPEDIZIONE></MAGAZZINO-SPEDIZIONE>
+                              <FAMIGLIA-COMM></FAMIGLIA-COMM>
+                              <ESENZIONE-IVA></ESENZIONE-IVA>
+                              <AGENTE>$agente</AGENTE>
+                              <CAT-PROV-1>$cat_prov_agente</CAT-PROV-1>
+                              <ORDINE-1></ORDINE-1>
+                              <AGENTE2></AGENTE2>
+                              <CAT-PROV-2></CAT-PROV-2>
+                              <ORDINE-2></ORDINE-2>
+                              <VERIFICA-FIDO></VERIFICA-FIDO>
+                              <STATO-ORDINE></STATO-ORDINE>
+                              <RESPONSABILE></RESPONSABILE>
+                              <DATA-CONFERMA-ORDINE></DATA-CONFERMA-ORDINE>
+                      </DATI-TESTATA-DORDINE>
+              </GFITEMS>
+      </GFDOrdCliTesAdd>
+      </Input>
+      <SetVar name="N-ORDINE" value="NUMERO-ORDINE" />
+      </API>
+      <API>
+      <Input>
+      <GFDOrdCliRigAdd> 
+        <GFITEMS>                                 
+          <RIGHE-DORDINE-E-OFFERTA>
+            <NUMERO-ORDINE></NUMERO-ORDINE>
+            <ARTICOLO1>$articolo</ARTICOLO1>
+            <SPECIFICA1></SPECIFICA1>
+            <UM1></UM1>
+            <QTA-VENDUTA1>$qta</QTA-VENDUTA1>
+            <SCONTO11></SCONTO11>
+            <SCONTO21></SCONTO21>
+            <DATA-RIC1></DATA-RIC1>
+            <DESCR-ARTICOLO1></DESCR-ARTICOLO1>
+            <SPECIF-CAMPAG1></SPECIF-CAMPAG1>
+            <SEQ-CAMPAG1></SEQ-CAMPAG1>
+            <STATO-RIGA1></STATO-RIGA1>
+            <SCONTO-MERCE1></SCONTO-MERCE1>
+            <FORZATURA1></FORZATURA1>
+            <PREZZO-UNITARIO1></PREZZO-UNITARIO1>
+            <CAUSALE1>$causale</CAUSALE1>
+          </RIGHE-DORDINE-E-OFFERTA>
+          </GFITEMS>
+      </GFDOrdCliRigAdd>
+      </Input>
+      <PutValue trx="RIGHE-DORDINE-E-OFFERTA" field="NUMERO-ORDINE" value="N-ORDINE" />
+      </API>
+      </Inputs>
+~~~~
+
+@note Il webservice risponde con lo stesso XML processato, con l'aggiunta in testata di
+~~~~
+XML
+      <NUMERO-ORDINE>13OC025518</NUMERO-ORDINE>
+~~~~
