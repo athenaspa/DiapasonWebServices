@@ -1,6 +1,7 @@
 <!-- 
 	INTERROGAZIONE DATI RELATIVI ALLA DISPONIBILITA' DEGLI ARTICOLI
 	
+	se un prodotto non compare in questa lista vuol dire che ha giacenza = 0 o non è vendibile; 
 	
 @param $business_division {stringa} codice che identifica univocamente il flusso degli articoli
 
