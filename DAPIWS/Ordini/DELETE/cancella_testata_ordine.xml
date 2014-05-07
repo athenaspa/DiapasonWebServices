@@ -1,0 +1,13 @@
+<!-- 
+	Cancella l'ordine
+	Questa operazione è possibile prima che l'ordine sia rilasciato e solamente dopo che sono state cancellate tutte le righe associate
+	
+@param $numero_ordine {stringa} codice che identifica univocamente l'ordine dentro a Diapason
+-->
+<GFDOrdCliTesDel>
+	<GFITEMS>
+		<DATI-TESTATA-DORDINE>
+			<NUMERO-ORDINE>$numero_ordine</NUMERO-ORDINE>
+		</DATI-TESTATA-DORDINE>
+	</GFITEMS>
+</GFDOrdCliTesDel

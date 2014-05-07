@@ -1,0 +1,13 @@
+<!-- 
+	Cancella tutte le righe di un ordine
+	Questa operazione è possibile prima che l'ordine sia rilasciato
+	
+@param $numero_ordine {stringa} codice che identifica univocamente l'ordine dentro a Diapason
+-->
+<GFDOrdCliRigDel>
+  <GFITEMS>
+    <RIGHE-DORDINE-E-OFFERTA>
+      <NUMERO-ORDINE>$numero_ordine</NUMERO-ORDINE>
+    </RIGHE-DORDINE-E-OFFERTA>
+  </GFITEMS>
+</GFDOrdCliRigDel>
