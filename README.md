@@ -4,7 +4,7 @@ DiapasonWebServices
 Web Service ospitati da Diapason
 --------------
 
-- DAPI 
+- DAPIWS 
 - SalesOrderHeadingWS
 - SessionWS
 - SubjectWS
