@@ -1,7 +1,7 @@
 DiapasonWebServices
 ==============
 
-Diapason ospita diversi Web Services
+Web Service ospitati da Diapason
 --------------
 
 - DAPI 
@@ -28,3 +28,4 @@ Diapason ospita diversi Web Services
 
 - - -
 **WarehouseBalancesWS** gestisce la giacenza degli articoli presenti a diapason
+
