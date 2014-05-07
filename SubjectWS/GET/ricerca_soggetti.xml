@@ -1,3 +1,12 @@
+<!--
+Mi consente di fare delle query all'interno del database dei soggetti
+
+nell'esempio di query qui sotto estraggo tutti i soggetti che hanno un indirizzo email valido, che hanno abilitazione amministrativa 
+e che hanno come agente uno di quelli nell'elenco risportato
+
+Un ipotetico utilizzo: quando un dealer si logga il sistema interroga diapason e diapason gli risponde con la lista dei suoi clienti
+se ne sono stati aggiunti di nuovi riporta il nominativo
+-->
 <Query name="AthSubject-Search" orderBy="1" pagesize="0" service="Subject" count="yes">
 	<Conditions>
 		<Condition name="email" operator="=" negative="sqlFilter">
