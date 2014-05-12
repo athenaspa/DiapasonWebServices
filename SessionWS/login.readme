@@ -1,19 +1,69 @@
 Utilizzo dei servizi
 
-Il web service di gestione della sessione fornisce i due metodi login() e logout() da chiamarsi rispettivamente all’inizio e alla fine della sessione di lavoro:
+Il login al sistema viene gestito mediante un apposito Web Service esposto all’URI http://<server>:<porta>/diapasonws/SessionWS?wsdl
+Il Web Service fornisce i due metodi login() e logout() da chiamarsi rispettivamente all’inizio e alla fine della
+sessione di lavoro. Il metodo login() riceve in input le informazioni di login all’interno di un oggetto Session, il
+seguente frammento di codice Java mostra un esempio di utilizzo; NB:
+· i valori indicati sono di esempio e non significativi per una specifica installazione cliente
+· l’esempio si basa sulle classi generate automaticamente da un wizard usato per realizzare il client del web service
 
-…
-SessionWebService.SessionWebServiceService() diapasonSession = new SessionWebService.SessionWebServiceService();
-SessionWebService.session sessionInfo = new SessionWebService.session();
-sessionInfo.company = "01SIT01";
-sessionInfo.user = "DIAP60";
-sessionInfo.passwd = "DIAP60";
-sessionInfo.plant = "A";
-sessionInfo.language = "I";
-sessionInfo.location = "tst:per:std";
-sessionInfo.verbose = "1";
-sessionInfo.layout = "GMA;/;:;.;,;D;D;A;Y";
-sessionInfo.encoding = "ISO-8859-1";
+	<%
+	String sessionEndpoint = "http://<server>:<porta>/diapasonws/SessionWS?wsdl";
+	SessionWebServiceProxy sessionProxy = new SessionWebServiceProxy(sessionEndpoint);
+	SessionWebService sessionWebService = sessionProxy.getSessionWebService();
+	Session session = new Session();
+	session.setCompany(company);
+	session.setUser(user);
+	session.setPasswd(password);
+	session.setPlant(plant);
+	session.setLanguage(language);
+	session.setLocation(location);
+		if (verbose != null) {
+		session.setVerbose(verbose.trim());
+		} else {
+		session.setVerbose("1");
+		}
+	session.setLayout("GMA;/;:;.;,;D;D;A;Y");
+	session.setEncoding("ISO-8859-1");
+	String sessionId = null;
+	sessionId = sessionWebService.login(session);
+		// Chiamata allo specifico web server
+		// ...
+		// al quale passo la sessionId
+		// ...
+		} catch (RemoteException e) {
+		e.printStackTrace();
+		} finally {
+			try {
+			if (sessionWebService != null && sessionId != null) {
+			sessionWebService.logout(sessionId);
+			}
+			} catch (RemoteException e) {}
+		}
+	%>
 
-
-String sessionId = diapasonSession.login(sessionInfo);
+I campi specificati hanno il seguente significato:
+· company: società di login
+· user: utente applicativo
+· passwd: password utente applicativo
+· plant: stabilimento
+· language: codice lingua
+· location: path completo di localizzazioni per il login a Diapason quindi ad esempio localizzazione col e modalità per va espresso come col:per:std
+· verbose: livello di log per Diapason (i valori possibili vanno da 1 a 6)
+· layout: informazioni di formattazione separate da ; (si tratta delle stesse informazioni specificate nella transazione di Diapason per la gestione del layout)
+o formato della data
+o separatore usato per le date
+o separatore per l’ora (al momento non supportato)
+o separatore delle migliaia
+o separatore dei decimali
+o posizione del segno
+o carattere segno debito
+o carattere segno credito
+o flag Y/N per il raggruppamento delle migliaia
+· encoding: encoding utilizzato dall’applicazione (a meno di necessità particolari utilizzare WINDOWS-1252)
+La variabile sessionId deve quindi essere passata nelle invocazioni dei web service.
+Al termine delle operazioni utilizzare il metodo logout() dello stesso web service passando l’identificativo di sessione.
+Questa gestione della sessione rende agevole e performante l’utilizzo di più Web Service all’interno di una stessa
+sessione di lavoro; i Web Service Diapason mettono a disposizione una versione che accetta, al posto della stringa
+che identifica la sessione, l’oggetto Session con tutte le informazioni di login: in questo caso il login viene eseguito
+automaticamente dal metodo del Web Service.
