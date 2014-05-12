@@ -1,14 +1,14 @@
 	<%
-	String sessionEndpoint = "http://<server>:<porta>/diapasonws/SessionWS?wsdl";
+	String sessionEndpoint = "http://" + server + ":" + port + "/diapasonws/SessionWS?wsdl";
 	SessionWebServiceProxy sessionProxy = new SessionWebServiceProxy(sessionEndpoint);
 	SessionWebService sessionWebService = sessionProxy.getSessionWebService();
 	Session session = new Session();
-	session.setCompany(company);
-	session.setUser(user);
-	session.setPasswd(password);
-	session.setPlant(plant);
-	session.setLanguage(language);
-	session.setLocation(location);
+	session.setCompany("01SIT01");
+	session.setUser("DIAP60");
+	session.setPasswd("DIAP60");
+	session.setPlant("A");
+	session.setLanguage("I");
+	session.setLocation("tst:per:std");
 		if (verbose != null) {
 		session.setVerbose(verbose.trim());
 		} else {
