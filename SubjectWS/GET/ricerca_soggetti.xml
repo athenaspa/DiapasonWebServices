@@ -41,14 +41,58 @@ se ne sono stati aggiunti di nuovi riporta il nominativo
 			<Value>A</Value>
 		</Condition>
 	</Conditions>
-	<Fields>
-		<Field name="subjectID"/>
-		<Field name="firmName"/>
-		<Field name="agent1Id"/>
-		<Field name="agent2Id"/>
-		<Field name="email"/>
-		<Field name="isSupplier"/>
-		<Field name="isCustomer"/>
-		<Field name="isAgent"/>
-	</Fields>
+    <Fields>
+        <Field name="subjectID"/>
+        <Field name="firmName"/>
+        <Field name="agent1Id"/>
+        <Field name="agent2Id"/>
+        <Field name="vatID"/>
+        <Field name="firmName"/>
+        <Field name="authorization"/>
+        <Field name="accountType"/>
+        <Field name="qualification"/>
+        <Field name="birthDate"/>
+        <Field name="updateDate"/>
+        <Field name="taxpayerError"/>
+        <Field name="vatError"/>
+        <Field name="accountMaster1"/>
+        <Field name="accountMaster2"/>
+        <Field name="holding"/>
+        <Field name="shortDescription"/>
+        <Field name="role"/>
+        <Field name="aggregByArea"/>
+        <Field name="aggregByCompGroup"/>
+        <Field name="vatExemp"/>
+        <Field name="dateVatExemp"/>
+        <Field name="numberVatExemp"/>
+        <Field name="istatID"/>
+        <Field name="vatTreatment"/>
+        <Field name="isSupplier"/>
+        <Field name="isCustomer"/>
+        <Field name="isAgent"/>
+        <Field name="dateAccountMaster1"/>
+        <Field name="dateAccountMaster2"/>
+        <Field name="companyI"/>
+        <Field name="addressID"/>
+        <Field name="addressType"/>
+        <Field name="addressFirmName"/>
+        <Field name="street"/>
+        <Field name="nation"/>
+        <Field name="state"/>
+        <Field name="city"/>
+        <Field name="area"/>
+        <Field name="zipCode"/>
+        <Field name="telephoneNo"/>
+        <Field name="telefaxNo"/>
+        <Field name="telexNo"/>
+        <Field name="warehouse"/>
+        <Field name="workCenter"/>
+        <Field name="zone"/>
+        <Field name="commercialDepartment"/>
+        <Field name="agent1Id"/>
+        <Field name="agent2Id"/>
+        <Field name="email"/>
+        <Field name="invoiceCustomerId"/>
+        <Field name="customerType"/>
+    </Fields>
 </Query>
