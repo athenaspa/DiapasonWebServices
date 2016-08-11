@@ -6,7 +6,7 @@ $email = email
 -->
 <Query name="Subject-Search" orderBy="1" pagesize="0" service="Subject" count="no">
          <Conditions>
-          <Condition name="firmName" operator="CONTAINS" caseSensitive="false">' .
+          <Condition name="firmName" operator="CONTAINS" caseSensitive="false">
               <Value> . trim($firmName) . </Value>
             </Condition>
           <Condition name="vatID" operator="CONTAINS" caseSensitive="false">
