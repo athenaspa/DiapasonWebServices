@@ -16,7 +16,7 @@ $email = email
   					<Value> . trim($taxpayerID) . </Value>
   				</Condition>
   				<Condition name="email" operator="CONTAINS" caseSensitive="false">
-  					<Value>' . trim($email) . '</Value>
+	  				<Value> . trim($email) . </Value>
   				</Condition>
 			</Conditions>
 				<Fields>
