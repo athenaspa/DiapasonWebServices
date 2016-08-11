@@ -5,20 +5,20 @@ $taxpayerID = codice fiscale
 $email = email
 -->
 <Query name="Subject-Search" orderBy="1" pagesize="0" service="Subject" count="no">
-         <Conditions>
-          <Condition name="firmName" operator="CONTAINS" caseSensitive="false">
-              <Value> . trim($firmName) . </Value>
-            </Condition>
-          <Condition name="vatID" operator="CONTAINS" caseSensitive="false">
-  					<Value> . trim($vatID) . </Value>
-  				</Condition>
-  				<Condition name="taxpayerID" operator="CONTAINS" caseSensitive="false">
-  					<Value> . trim($taxpayerID) . </Value>
-  				</Condition>
-  				<Condition name="email" operator="CONTAINS" caseSensitive="false">
-	  				<Value> . trim($email) . </Value>
-  				</Condition>
-			</Conditions>
+  <Conditions>
+    <Condition name="firmName" operator="CONTAINS" caseSensitive="false">
+        <Value> . trim($firmName) . </Value>
+    </Condition>
+    <Condition name="vatID" operator="CONTAINS" caseSensitive="false">
+  			<Value> . trim($vatID) . </Value>
+  	</Condition>
+  	<Condition name="taxpayerID" operator="CONTAINS" caseSensitive="false">
+  			<Value> . trim($taxpayerID) . </Value>
+  	</Condition>
+  	<Condition name="email" operator="CONTAINS" caseSensitive="false">
+	  		<Value> . trim($email) . </Value>
+  	</Condition>
+	</Conditions>
 				<Fields>
 				  <Field name="subjectID"/>
 				  <Field name="firmName"/>
