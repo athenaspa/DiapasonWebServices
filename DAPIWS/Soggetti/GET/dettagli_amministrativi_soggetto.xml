@@ -1,6 +1,6 @@
 <!-- 
 	INTERROGAZIONE DATI AMMINISTRATIVI SOGGETTO
-	Questa API interroga Diapason e restituisce i dati generali del soggetto
+	Questa API interroga Diapason e restituisce i dati amministrativi del soggetto
 	
 @param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
 -->
