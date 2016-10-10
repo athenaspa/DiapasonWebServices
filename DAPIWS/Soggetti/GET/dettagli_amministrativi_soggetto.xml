@@ -3,12 +3,14 @@
 	Questa API interroga Diapason e restituisce i dati amministrativi del soggetto
 	
 @param $codice_soggetto {stringa} codice che identifica univocamente il soggetto dentro a Diapason
+@param $divisione_commerciale {stringa} codice che identifica univocamente la divisione commerciale a cui appartiene il soggetto dentro a Diapason
+	possibili valori: 01 industria, 02 aftermarket e distribuzione
 -->
 <GFDOrdCliDatComGet>
 	<GFITEMS>
 		<DATI-GESTIONALI-CLIENTE>
 			<CLIENTE>$codice_soggetto</CLIENTE>
-			<DIVISIONE-COMMERCIALE>02</DIVISIONE-COMMERCIALE>
+			<DIVISIONE-COMMERCIALE>$divisione_commerciale</DIVISIONE-COMMERCIALE>
 		</DATI-GESTIONALI-CLIENTE>
 	</GFITEMS>
 </GFDOrdCliDatComGet>
