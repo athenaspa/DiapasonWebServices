@@ -1,0 +1,24 @@
+<Query name="CampagneCli" orderBy="1" pagesize="0" service="Item" count="yes">
+    <Conditions>
+        <Condition name="OPCCDCL" operator="=" caseSensitive="true">
+            <Value>$subject</Value>
+        </Condition>
+        <Condition name="OPHSTAT" operator="IN">
+            <Value>R</Value>
+            <Value>A</Value>
+        </Condition>
+        <Condition name="OPCDTIN" operator="GE">
+        	<Value>01/01/YYYY</Value>
+		</Condition>
+        <Condition name="OPCDTFI" operator="LE">
+        	<Value>31/12/YYYY</Value>
+		</Condition>
+    </Conditions>
+    <Fields>
+		<Field name="OPVITEM" /> <!-- item -->
+		<Field name="OPCCAMP" /> <!-- campagna -->
+		<Field name="OPVPRZO" /> <!-- prezzo -->
+		<Field name="OPVQUAN" /> <!-- quantita -->
+		<Field name="OPHDESC" /> <!-- descrizione -->
+   </Fields>
+</Query>
