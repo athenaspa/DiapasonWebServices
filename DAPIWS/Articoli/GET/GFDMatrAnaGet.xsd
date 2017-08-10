@@ -1,0 +1,31 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GFDMatrAnaGet">
+    <xs:annotation>
+      INTERROGAZIONE DETTAGLI GENERALI ARTICOLO
+      Restituisce alcuni dettagli relativi agli articoli
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GFITEMS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ANAGRAFICA-MATRICOLE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="CODICE-ARTICOLO"/>
+                    <xs:element type="xs:string" name="TIPO-MATRICOLA"/>
+                    <xs:element type="xs:string" name="CODICE-MATRICOLA"/>
+                  </xs:sequence>
+                </xs:complexType>
+                <xs:annotation>
+                  @param CODICE-ARTICOLO codice identificativo del prodotto	es: DK0030001
+                  @param CODICE-MATRICOLA {stringa} codice seriale univoco dell'articolo in rifermineto al produttore. es: HD36B011318A3B1
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

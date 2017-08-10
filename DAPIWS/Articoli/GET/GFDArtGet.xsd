@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GFDArtGet">
+    <xs:annotation>
+      INTERROGAZIONE DETTAGLI GENERALI ARTICOLO
+      Questa API interroga Diapason e restituisce alcuni dettagli relativi agli articoli
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GFITEMS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DATI-GENERALI-ARTICOLI">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="CODICE-ARTICOLO"/>
+                  </xs:sequence>
+                </xs:complexType>
+                <xs:annotation>
+                  codice identificativo univoco dell'articolo all'interno di diapason
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
